@@ -15,10 +15,15 @@ class App extends React.Component {
         this.saveUserInput = this.saveUserInput.bind(this);
     }
 
-    saveUserInput(event) {
-        event.preventDefault();
-        console.log('User input saved!');
-        console.log(event.target);
+    saveUserInput(e) {
+        e.preventDefault();
+        this.setState({
+            event: {
+                name: e.target.name.value,
+                date: e.target.date.value,
+                time: e.target.time.value
+            }
+        });
     }
 
     render() {
