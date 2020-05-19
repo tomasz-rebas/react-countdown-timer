@@ -1,5 +1,6 @@
 import React from 'react';
-import Form from './Form'
+import Form from './Form';
+import Main from './Main';
 
 class App extends React.Component {
 
@@ -33,6 +34,8 @@ class App extends React.Component {
                     eventData={this.state.event}
                     saveUserInput={this.saveUserInput}
                 />
+                <hr/>
+                <Main/>
             </div>
         );
     }
