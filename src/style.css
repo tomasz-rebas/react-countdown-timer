@@ -1,0 +1,10 @@
+body {
+  background-color: #333;
+  color: #ddd;
+  font-family: 'Calibri';
+  text-align: center;
+}
+
+input {
+  display: inline-block;
+}
