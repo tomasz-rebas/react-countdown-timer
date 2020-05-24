@@ -8,9 +8,9 @@ class App extends React.Component {
         super();
         this.state = {
             event: {
-                name: "",
-                date: "",
-                time: "",
+                name: "Next Transit of Venus",
+                date: "10 Dec 2117",
+                time: "23:58",
                 timeLeftInSeconds: ""
             }
         }
@@ -36,18 +36,26 @@ class App extends React.Component {
         if (isNaN(eventDateInMiliseconds)) {
            console.warn('Please type in a valid date.');
         } else {
-            const eventDateTimeInSeconds = eventDateInMiliseconds / 1000 + this.getTimeInSeconds(e.target.time.value);
+            const eventTimeInSeconds = this.getTimeInSeconds(e.target.time.value);
+            const eventDateTimeInSeconds = eventDateInMiliseconds / 1000 + eventTimeInSeconds;
             const currentDateTimeInSeconds = Date.parse(new Date()) / 1000;
             let timeLeftInSeconds = 0;
             if (eventDateTimeInSeconds - currentDateTimeInSeconds > 0) {
                 timeLeftInSeconds = eventDateTimeInSeconds - currentDateTimeInSeconds;
             }
 
+            let displayTime;
+            if (eventTimeInSeconds > 0) {
+                displayTime = e.target.time.value;
+            } else {
+                displayTime = '0:00';
+            }
+
             this.setState({
                 event: {
                     name: e.target.name.value,
                     date: e.target.date.value,
-                    time: e.target.time.value,
+                    time: displayTime,
                     timeLeftInSeconds: timeLeftInSeconds
                 }
             });
