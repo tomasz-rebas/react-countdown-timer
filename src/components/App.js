@@ -90,7 +90,11 @@ class App extends React.Component {
             stringForDisplay += minuteCount + ':';
             timeLeft = timeLeft - minuteCount * minuteInSeconds;
         }
-        stringForDisplay += timeLeft;
+        if (timeLeft >= 10) {
+            stringForDisplay += timeLeft;
+        } else {
+            stringForDisplay += '0' + timeLeft;
+        }
 
         return stringForDisplay;
     }
