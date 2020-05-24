@@ -102,6 +102,9 @@ class App extends React.Component {
         }
         if (timeLeft >= minuteInSeconds) {
             const minuteCount = parseInt(timeLeft / minuteInSeconds);
+            if (minuteCount < 10) {
+                stringForDisplay += '0';
+            }
             stringForDisplay += minuteCount + ':';
             timeLeft = timeLeft - minuteCount * minuteInSeconds;
         }
