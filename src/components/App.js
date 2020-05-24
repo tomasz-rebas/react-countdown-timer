@@ -10,7 +10,7 @@ class App extends React.Component {
             name: "Next Transit of Venus",
             date: "10 Dec 2117",
             time: "23:58",
-            timeLeftInSeconds: 999999999
+            timeLeftInSeconds: 3
         }
         this.saveUserInput = this.saveUserInput.bind(this);
         this.formatTimeLeftDisplay = this.formatTimeLeftDisplay.bind(this);
@@ -35,15 +35,22 @@ class App extends React.Component {
     }
 
     decrementTimeInSeconds() {
-        this.setState(prevState => {
-            return {
-                timeLeftInSeconds: prevState.timeLeftInSeconds - 1
-            }
-        });
+        if (this.state.timeLeftInSeconds > 0) {
+            this.setState(prevState => {
+                return {
+                    timeLeftInSeconds: prevState.timeLeftInSeconds - 1
+                }
+            });
+        }
     }
 
     formatTimeLeftDisplay() {
         let timeLeft = this.state.timeLeftInSeconds;
+
+        if (timeLeft <= 0) {
+            return 'It\'s happening! Or already happened.';
+        }
+
         let stringForDisplay = '';
 
         const yearInSeconds = 31556926;
@@ -104,12 +111,10 @@ class App extends React.Component {
             }
 
             this.setState({
-                event: {
-                    name: e.target.name.value,
-                    date: e.target.date.value,
-                    time: displayTime,
-                    timeLeftInSeconds: timeLeftInSeconds
-                }
+                name: e.target.name.value,
+                date: e.target.date.value,
+                time: displayTime,
+                timeLeftInSeconds: timeLeftInSeconds
             });
         }
     }
