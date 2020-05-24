@@ -35,7 +35,7 @@ class App extends React.Component {
                     saveUserInput={this.saveUserInput}
                 />
                 <hr/>
-                <Main/>
+                <Main eventData={this.state.event}/>
             </div>
         );
     }
