@@ -8,9 +8,21 @@ function Form(props) {
                 <p className="info">Type in data about your event</p>
             </div>
             <div className="input-container">
-                <input name="name" placeholder="Name" defaultValue={props.eventData.name}/><br/>
-                <input name="date" placeholder="Date (e.g. 12 Oct 2020)" defaultValue={props.eventData.date}/><br/>
-                <input name="time" placeholder="Time (e.g. 23:50)" defaultValue={props.eventData.time}/><br/>
+                <input 
+                    name="name" 
+                    placeholder="Name" 
+                    defaultValue={props.eventData.name}
+                /><br/>
+                <input 
+                    name="date" 
+                    placeholder="Date (e.g. 12 Oct 2020)" 
+                    defaultValue={props.eventData.date}
+                /><br/>
+                <input 
+                    name="time" 
+                    placeholder="Time (e.g. 23:50)" 
+                    defaultValue={props.eventData.time}
+                /><br/>
                 <button className="start-button">Start</button>
             </div>
         </form>
