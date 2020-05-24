@@ -96,19 +96,18 @@ class App extends React.Component {
             }
             timeLeft = timeLeft - dayCount * dayInSeconds;
         }
-        if (timeLeft >= hourInSeconds) {
-            const hourCount = parseInt(timeLeft / hourInSeconds);
-            stringForDisplay += hourCount + ':';
-            timeLeft = timeLeft - hourCount * hourInSeconds;
+
+        const hourCount = parseInt(timeLeft / hourInSeconds);
+        stringForDisplay += hourCount + ':';
+        timeLeft = timeLeft - hourCount * hourInSeconds;
+
+        const minuteCount = parseInt(timeLeft / minuteInSeconds);
+        if (minuteCount < 10) {
+            stringForDisplay += '0';
         }
-        if (timeLeft >= minuteInSeconds) {
-            const minuteCount = parseInt(timeLeft / minuteInSeconds);
-            if (minuteCount < 10) {
-                stringForDisplay += '0';
-            }
-            stringForDisplay += minuteCount + ':';
-            timeLeft = timeLeft - minuteCount * minuteInSeconds;
-        }
+        stringForDisplay += minuteCount + ':';
+        timeLeft = timeLeft - minuteCount * minuteInSeconds;
+
         if (timeLeft >= 10) {
             stringForDisplay += timeLeft;
         } else {
