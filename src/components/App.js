@@ -11,10 +11,11 @@ class App extends React.Component {
                 name: "Next Transit of Venus",
                 date: "10 Dec 2117",
                 time: "23:58",
-                timeLeftInSeconds: ""
+                timeLeftInSeconds: 999999999
             }
         }
         this.saveUserInput = this.saveUserInput.bind(this);
+        this.formatTimeLeftDisplay = this.formatTimeLeftDisplay.bind(this);
     }
 
     getTimeInSeconds(timeInput) {
@@ -28,6 +29,52 @@ class App extends React.Component {
             }
         }
         return timeInSeconds;
+    }
+
+    componentDidMount() {
+        this.formatTimeLeftDisplay();
+    }
+
+    formatTimeLeftDisplay() {
+        let timeLeft = this.state.event.timeLeftInSeconds;
+        let stringForDisplay = '';
+
+        const yearInSeconds = 31556926;
+        const monthInSeconds = 2629744;
+        const dayInSeconds = 86400;
+        const hourInSeconds = 3600;
+        const minuteInSeconds = 60;
+
+        if (timeLeft >= yearInSeconds) {
+            const yearCount = parseInt(timeLeft / yearInSeconds);
+            stringForDisplay += yearCount + 'y ';
+            timeLeft = timeLeft - yearCount * yearInSeconds;
+        }
+        if (timeLeft >= monthInSeconds) {
+            const monthCount = parseInt(timeLeft / monthInSeconds);
+            stringForDisplay += monthCount + 'm ';
+            timeLeft = timeLeft - monthCount * monthInSeconds;
+        }
+        if (timeLeft >= dayInSeconds) {
+            const dayCount = parseInt(timeLeft / dayInSeconds);
+            stringForDisplay += dayCount + 'd ';
+            timeLeft = timeLeft - dayCount * dayInSeconds;
+        }
+        if (timeLeft >= hourInSeconds) {
+            const hourCount = parseInt(timeLeft / hourInSeconds);
+            stringForDisplay += hourCount + 'h ';
+            timeLeft = timeLeft - hourCount * hourInSeconds;
+        }
+        if (timeLeft >= minuteInSeconds) {
+            const minuteCount = parseInt(timeLeft / minuteInSeconds);
+            stringForDisplay += minuteCount + 'm ';
+            timeLeft = timeLeft - minuteCount * minuteInSeconds;
+        }
+        stringForDisplay += timeLeft + 's ';
+
+        console.log(stringForDisplay);
+
+        return stringForDisplay;
     }
 
     saveUserInput(e) {
@@ -70,7 +117,10 @@ class App extends React.Component {
                     saveUserInput={this.saveUserInput}
                 />
                 <hr/>
-                <Main eventData={this.state.event}/>
+                <Main 
+                    eventData={this.state.event}
+                    formatTimeLeftDisplay={this.formatTimeLeftDisplay}
+                />
             </div>
         );
     }
