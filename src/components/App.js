@@ -123,6 +123,9 @@ class App extends React.Component {
         const eventDateInMiliseconds = Date.parse(e.target.date.value);
         if (isNaN(eventDateInMiliseconds)) {
            console.warn('Please type in a valid date.');
+           alert('Hey, we can\'t start a countdown without properly formatted date!\n\n'
+            + 'Please use one of the following formats:\n\n'
+            + '2020-10-12\n12-10-2020\n12-10-20\n12 Oct 2020\n12 Oct 20');
         } else {
             const eventTimeInSeconds = this.getEventTimeInSeconds(e.target.time.value);
             const eventDateTimeInSeconds = eventDateInMiliseconds / 1000 + eventTimeInSeconds;
