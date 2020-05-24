@@ -125,6 +125,8 @@ class App extends React.Component {
            alert('Hey, we can\'t start a countdown without properly formatted date!\n\n'
             + 'Please use one of the following formats:\n\n'
             + '2020-10-12\n12-10-2020\n12-10-20\n12 Oct 2020\n12 Oct 20');
+        } else if (e.target.name.value === '') {
+            alert('What event do you want to start a countdown for? You didn\'t specify a name.');
         } else {
             const eventTimeInSeconds = this.getEventTimeInSeconds(e.target.time.value);
             const eventDateTimeInSeconds = eventDateInMiliseconds / 1000 + eventTimeInSeconds;
