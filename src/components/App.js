@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 import Form from './Form';
 import Main from './Main';
 
@@ -150,6 +151,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <Header/>
                 <Form 
                     eventData={this.state}
                     saveUserInput={this.saveUserInput}
