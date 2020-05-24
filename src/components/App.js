@@ -67,17 +67,32 @@ class App extends React.Component {
 
         if (timeLeft >= yearInSeconds) {
             const yearCount = parseInt(timeLeft / yearInSeconds);
-            stringForDisplay += yearCount + ' years ';
+            stringForDisplay += yearCount;
+            if (yearCount > 1) {
+                stringForDisplay += ' years ';
+            } else {
+                stringForDisplay += ' year ';
+            }
             timeLeft = timeLeft - yearCount * yearInSeconds;
         }
         if (timeLeft >= monthInSeconds) {
             const monthCount = parseInt(timeLeft / monthInSeconds);
-            stringForDisplay += monthCount + ' months ';
+            stringForDisplay += monthCount;
+            if (monthCount > 1) {
+                stringForDisplay += ' months ';
+            } else {
+                stringForDisplay += ' month ';
+            }
             timeLeft = timeLeft - monthCount * monthInSeconds;
         }
         if (timeLeft >= dayInSeconds) {
             const dayCount = parseInt(timeLeft / dayInSeconds);
-            stringForDisplay += dayCount + ' days ';
+            stringForDisplay += dayCount;
+            if (dayCount > 1) {
+                stringForDisplay += ' days ';
+            } else {
+                stringForDisplay += ' day ';
+            }
             timeLeft = timeLeft - dayCount * dayInSeconds;
         }
         if (timeLeft >= hourInSeconds) {
