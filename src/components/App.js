@@ -7,15 +7,14 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            event: {
-                name: "Next Transit of Venus",
-                date: "10 Dec 2117",
-                time: "23:58",
-                timeLeftInSeconds: 999999999
-            }
+            name: "Next Transit of Venus",
+            date: "10 Dec 2117",
+            time: "23:58",
+            timeLeftInSeconds: 999999999
         }
         this.saveUserInput = this.saveUserInput.bind(this);
         this.formatTimeLeftDisplay = this.formatTimeLeftDisplay.bind(this);
+        this.decrementTimeInSeconds = this.decrementTimeInSeconds.bind(this);
     }
 
     getTimeInSeconds(timeInput) {
@@ -32,11 +31,19 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.formatTimeLeftDisplay();
+        setInterval(this.decrementTimeInSeconds, 1000);
+    }
+
+    decrementTimeInSeconds() {
+        this.setState(prevState => {
+            return {
+                timeLeftInSeconds: prevState.timeLeftInSeconds - 1
+            }
+        });
     }
 
     formatTimeLeftDisplay() {
-        let timeLeft = this.state.event.timeLeftInSeconds;
+        let timeLeft = this.state.timeLeftInSeconds;
         let stringForDisplay = '';
 
         const yearInSeconds = 31556926;
@@ -71,8 +78,6 @@ class App extends React.Component {
             timeLeft = timeLeft - minuteCount * minuteInSeconds;
         }
         stringForDisplay += timeLeft + 's ';
-
-        console.log(stringForDisplay);
 
         return stringForDisplay;
     }
@@ -113,12 +118,12 @@ class App extends React.Component {
         return (
             <div>
                 <Form 
-                    eventData={this.state.event}
+                    eventData={this.state}
                     saveUserInput={this.saveUserInput}
                 />
                 <hr/>
                 <Main 
-                    eventData={this.state.event}
+                    eventData={this.state}
                     formatTimeLeftDisplay={this.formatTimeLeftDisplay}
                 />
             </div>

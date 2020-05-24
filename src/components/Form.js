@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Form(props) {
-    console.log(props)
     return (
         <form onSubmit={props.saveUserInput}>
             <div>
