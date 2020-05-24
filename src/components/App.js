@@ -10,14 +10,14 @@ class App extends React.Component {
             name: "Next Transit of Venus",
             date: "10 Dec 2117",
             time: "23:58",
-            timeLeftInSeconds: 3
+            timeLeftInSeconds: 0
         }
         this.saveUserInput = this.saveUserInput.bind(this);
         this.formatTimeLeftDisplay = this.formatTimeLeftDisplay.bind(this);
         this.decrementTimeInSeconds = this.decrementTimeInSeconds.bind(this);
     }
 
-    getTimeInSeconds(timeInput) {
+    getEventTimeInSeconds(timeInput) {
         let timeInSeconds = 0;
         if (timeInput.length >= 4) {
             if (timeInput[1] === ':' || timeInput[2] === ':') {
@@ -31,6 +31,12 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        // Calculate seconds left to the default event (next transit of Venus).
+        const timeLeftInSeconds = (Date.parse(this.state.date + ' ' + this.state.time) - Date.parse(new Date())) / 1000;
+        this.setState({
+            timeLeftInSeconds: timeLeftInSeconds
+        });
+        // Start decrementing seconds left to the event.
         setInterval(this.decrementTimeInSeconds, 1000);
     }
 
@@ -95,7 +101,7 @@ class App extends React.Component {
         if (isNaN(eventDateInMiliseconds)) {
            console.warn('Please type in a valid date.');
         } else {
-            const eventTimeInSeconds = this.getTimeInSeconds(e.target.time.value);
+            const eventTimeInSeconds = this.getEventTimeInSeconds(e.target.time.value);
             const eventDateTimeInSeconds = eventDateInMiliseconds / 1000 + eventTimeInSeconds;
             const currentDateTimeInSeconds = Date.parse(new Date()) / 1000;
             let timeLeftInSeconds = 0;
