@@ -10,6 +10,10 @@ form {
   justify-content: center;
 }
 
+.info {
+  width: 200px;
+}
+
 input {
   display: inline-block;
   width: 100%;
