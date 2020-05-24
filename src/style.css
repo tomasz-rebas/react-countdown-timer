@@ -24,7 +24,7 @@ input {
   width: 150px;
 }
 
-.save-button {
+.start-button {
   width: calc(100% + 4px);
 }
 
